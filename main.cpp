@@ -26,26 +26,43 @@ int set_color(libusb_device_handle *devh, libusb_context *ctx,
 
 // Green Color 0 255 0
 // unsigned char data[] = {0x27, 0x2B, 0x95, 0xFF, 0xE0, 0x45, 0x85, 0x6E};
+
 // Red color 255 0 0
 // unsigned char data[] = {0x27, 0x2B, 0x95, 0x04, 0xA8, 0x45, 0x7E, 0x76};
+
 // Blue Color 0 0 255
 // unsigned char data[] = {0x27, 0x2B, 0x95, 0xFF, 0xE0, 0x4A, 0x46, 0x76};
+
 // Yellow Color 255 255 0
 // unsigned char data[] = {0x27, 0x2B, 0x9D, 0x04, 0xA8, 0x45, 0x85, 0x6E};
+
 // White Color 255 255 255
 // unsigned char data[] = {0x27, 0x2b, 0x85, 0x04, 0xa8, 0x4a, 0x4d, 0x6e};
+
 // Light Blue Color 0 255 255
 // unsigned char data[] = {0x27, 0x2b, 0x9d, 0xff, 0xe0, 0x4a, 0x4d, 0x6e};
 // Purple Color ( I don't remember the values XD )
+
 // unsigned char data[] = {0x27, 0x26, 0x8d, 0x01, 0x88, 0x4a, 0x48, 0x86};
+
 // Turned off ( Leds only )
 // unsigned char data[] = {0x27, 0x2B, 0x55, 0xFF, 0xF0,0x4D, 0x7E, 0x76};
+
 // Turn On leds
 // unsigned char data[] = {0x27, 0x2b, 0x5d, 0xff, 0xf0, 0x4d, 0x85, 0x6e};
 
 // Works but you can't return from this even after unplugging the device
 // Red Breathing
 // unsigned char data[] = {0x27, 0x2B, 0x45, 0xFF, 0xF8, 0x4D, 0x85, 0x6E};
+
+// Neon mode
+// unsigned char data[] = {0x27, 0x2b, 0x75, 0xff, 0xc8, 0x4d, 0x85, 0x6e};
+
+// IDK line fast fadeing away?
+// unsigned char data[] = {0x27, 0x2b, 0x4d, 0xff, 0x00, 0x4d, 0x85, 0x6e};
+
+// Light on click
+// unsigned char data[] = {0x27, 0x2b, 0x55, 0xff, 0xe8, 0x4d, 0x85, 0x6e};
 
 int main() {
   libusb_device_handle *devh;
@@ -69,10 +86,13 @@ int main() {
     std::cout << "5. White Color\n";
     std::cout << "6. Light Blue Color\n";
     std::cout << "7. Purple Color\n";
-    std::cout << "8. Turn off leds\n";
-    std::cout << "9. Turn on leds\n";
-    std::cout << "10. Red Breathing - testing ONLY\n";
-    std::cout << "11. Exit\n";
+    std::cout << "8. Neon mode\n";
+    std::cout << "9. Color Stream Mode\n";
+    std::cout << "10. On Click Wave\n";
+    std::cout << "11. Turn Off Leds\n";
+    std::cout << "12. Turn On Leds\n";
+    std::cout << "13. Red Breathing - testing ONLY\n";
+    std::cout << "14. Exit\n";
     std::cout << "=====================\n";
 
     std::cout << "Enter the color number: ";
@@ -115,20 +135,35 @@ int main() {
       break;
     }
     case 8: {
-      unsigned char data8[] = {0x27, 0x2B, 0x55, 0xFF, 0xF0, 0x4D, 0x7E, 0x76};
+      unsigned char data8[] = {0x27, 0x2b, 0x75, 0xff, 0xc8, 0x4d, 0x85, 0x6e};
       set_color(devh, ctx, data8);
       break;
     }
     case 9: {
+      unsigned char data8[] = {0x27, 0x2b, 0x4d, 0xff, 0x00, 0x4d, 0x85, 0x6e};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    case 10: {
+      unsigned char data8[] = {0x27, 0x2b, 0x55, 0xff, 0xe8, 0x4d, 0x85, 0x6e};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    case 11: {
+      unsigned char data8[] = {0x27, 0x2B, 0x55, 0xFF, 0xF0, 0x4D, 0x7E, 0x76};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    case 12: {
       unsigned char data8[] = {0x27, 0x2B, 0x5D, 0xFF, 0xF0, 0x4D, 0x85, 0x6E};
       set_color(devh, ctx, data8);
     }
-    case 10: {
+    case 13: {
       unsigned char data9[] = {0x27, 0x2B, 0x45, 0xFF, 0xF8, 0x4D, 0x85, 0x6E};
       set_color(devh, ctx, data9);
       break;
     }
-    case 11:
+    case 14:
       goto exit_loop;
       break;
 
