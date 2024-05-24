@@ -41,8 +41,8 @@ int set_color(libusb_device_handle *devh, libusb_context *ctx,
 
 // Light Blue Color 0 255 255
 // unsigned char data[] = {0x27, 0x2b, 0x9d, 0xff, 0xe0, 0x4a, 0x4d, 0x6e};
-// Purple Color ( I don't remember the values XD )
 
+// Purple Color ( I don't remember the values XD )
 // unsigned char data[] = {0x27, 0x26, 0x8d, 0x01, 0x88, 0x4a, 0x48, 0x86};
 
 // Turned off ( Leds only )
@@ -63,6 +63,18 @@ int set_color(libusb_device_handle *devh, libusb_context *ctx,
 
 // Light on click
 // unsigned char data[] = {0x27, 0x2b, 0x55, 0xff, 0xe8, 0x4d, 0x85, 0x6e};
+
+// Green blinking with color switch
+// unsigned char data[] = {0x27, 0x2B, 0x65, 0xFF, 0xD8, 0x4D, 0x85, 0x6E};
+
+// Solid green / return to solid colors
+// unsigned char data[] = {0x27, 0x2B, 0x5D, 0xFF, 0xF0, 0x4D, 0x85, 0x6E};
+
+// Green breathing - we have probably two now beacuse red breathing changed color
+// unsigned char data[] = {0x27, 0x2B, 0x45, 0xFF, 0xF8, 0x4D, 0x85, 0x6E};
+
+// Wave mode?
+// unsigned char data[] = {0x27, 0x2B, 0x7D, 0xFF, 0xD0, 0x4D, 0x85, 0x6E};
 
 int main() {
   libusb_device_handle *devh;
@@ -89,10 +101,17 @@ int main() {
     std::cout << "8. Neon mode\n";
     std::cout << "9. Color Stream Mode\n";
     std::cout << "10. On Click Wave\n";
-    std::cout << "11. Turn Off Leds\n";
-    std::cout << "12. Turn On Leds\n";
-    std::cout << "13. Red Breathing - testing ONLY\n";
-    std::cout << "14. Exit\n";
+    std::cout << "11. Blinking With Colors\n";
+    std::cout << "12. Return To Solid Colors\n";
+    std::cout << "13. Green Breathing\n";
+    std::cout << "14. Wave\n";
+
+    /////////////////////////////////////////////////////////
+
+    std::cout << "15. Turn Off Leds\n";
+    std::cout << "16. Turn On Leds\n";
+    std::cout << "17. Red Breathing\n";
+    std::cout << "18. Exit\n";
     std::cout << "=====================\n";
 
     std::cout << "Enter the color number: ";
@@ -150,20 +169,41 @@ int main() {
       break;
     }
     case 11: {
-      unsigned char data8[] = {0x27, 0x2B, 0x55, 0xFF, 0xF0, 0x4D, 0x7E, 0x76};
+      unsigned char data8[] = {0x27, 0x2B, 0x65, 0xFF, 0xD8, 0x4D, 0x85, 0x6E};
       set_color(devh, ctx, data8);
       break;
     }
     case 12: {
       unsigned char data8[] = {0x27, 0x2B, 0x5D, 0xFF, 0xF0, 0x4D, 0x85, 0x6E};
       set_color(devh, ctx, data8);
+      break;
     }
     case 13: {
+      unsigned char data8[] = {0x27, 0x2B, 0x45, 0xFF, 0xF8, 0x4D, 0x85, 0x6E};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    case 14: {
+      unsigned char data8[] = {0x27, 0x2B, 0x7D, 0xFF, 0xD0, 0x4D, 0x85, 0x6E};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    //////////
+    case 15: {
+      unsigned char data8[] = {0x27, 0x2B, 0x55, 0xFF, 0xF0, 0x4D, 0x7E, 0x76};
+      set_color(devh, ctx, data8);
+      break;
+    }
+    case 16: {
+      unsigned char data8[] = {0x27, 0x2B, 0x5D, 0xFF, 0xF0, 0x4D, 0x85, 0x6E};
+      set_color(devh, ctx, data8);
+    }
+    case 17: {
       unsigned char data9[] = {0x27, 0x2B, 0x45, 0xFF, 0xF8, 0x4D, 0x85, 0x6E};
       set_color(devh, ctx, data9);
       break;
     }
-    case 14:
+    case 18:
       goto exit_loop;
       break;
 
@@ -171,6 +211,7 @@ int main() {
       std::cout << "Invalid input\n";
     }
     system("clear");
+    input = 0;
   }
 
 exit_loop:;
