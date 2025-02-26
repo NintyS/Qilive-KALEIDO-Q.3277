@@ -6,3 +6,5 @@ Some of colors works, and two modes works, solid color and breathing ( but only 
 Driver state by now: <br>
 ![image](https://github.com/NintyS/Qilive-KALEIDO-Q.3277/assets/31569763/ec488481-5128-4b12-ab0e-7743d2982821)
 
+Link to original drivers: https://support.auchan.com/pl/element?id=1176113
+
